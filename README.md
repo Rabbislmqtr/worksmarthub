@@ -17,7 +17,7 @@ Do not open `index.html` directly from `file://` when testing navigation; use HT
 - Responsive accessible design system
 - Canonical metadata, sitemap, robots.txt, breadcrumbs, and security headers
 - Per-page Open Graph and Twitter Card metadata with a generated 1200x630 share card
-- AdSense-ready placeholders that remain disabled until configured
+- Ad slots that stay out of the DOM entirely until AdSense is enabled
 
 ## Social share cards
 
@@ -102,7 +102,23 @@ These documents have not been reviewed by a lawyer. Owner-specific details that 
 
 ## AdSense configuration
 
-The current site intentionally does not load real advertisements. When the site is approved and the owner has an AdSense client ID, add the official code through a reviewed configuration layer. Never request clicks, place ads inside calculator controls, or make ads resemble navigation/download buttons.
+The site loads no advertisements. Visitors never see a placeholder box, a dashed outline, or any note about the site's monetisation status: while ads are off, each slot element is **removed from the DOM** (`renderAdSlots()` in `app.js`), so there is nothing to render and nothing to accidentally style.
+
+Everything is driven by one object near the top of `app.js`:
+
+```js
+const ADS = { enabled: false, publisherId: '', units: { 'home-mid': '', 'tool-sidebar': '' } };
+```
+
+To switch ads on:
+
+1. Set `enabled` to `true` and put the AdSense publisher ID in `publisherId` (`ca-pub-…`).
+2. Paste each slot's ad-unit ID into `units`. The slot names are the `data-ad-slot` values: `home-mid` (homepage) and `tool-sidebar` (every calculator page).
+3. **Widen the Content-Security-Policy in `_headers`.** It is currently `script-src 'self'`, which will block the Google ad script outright — the ads simply will not appear. `img-src`, `frame-src` and `connect-src` also need Google's domains.
+
+Existing slot positions are already marked up in the HTML and in `renderTool()`, so step 1–2 are the only code changes needed to place an ad in a position that already exists. Adding a new position means adding one `adMount('name')` call and an `ADS.units` entry.
+
+Never request clicks, place ads inside calculator controls, or make ads resemble navigation or download buttons.
 
 ## Future server-side AI
 
