@@ -12,6 +12,7 @@
 .wrangler/
 node_modules/
 wrangler.jsonc
+scripts/
 
 # Editor and agent state
 .freebuff/

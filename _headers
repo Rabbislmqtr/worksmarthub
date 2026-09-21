@@ -8,3 +8,7 @@
   Cache-Control: public, max-age=86400
 /app.js
   Cache-Control: public, max-age=86400
+
+# Social share cards are referenced by crawlers, not loaded by the page.
+/og/*
+  Cache-Control: public, max-age=86400

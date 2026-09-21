@@ -16,7 +16,24 @@ Do not open `index.html` directly from `file://` when testing navigation; use HT
 - Deterministic tool recommendation fallback without an API key
 - Responsive accessible design system
 - Canonical metadata, sitemap, robots.txt, breadcrumbs, and security headers
+- Per-page Open Graph and Twitter Card metadata with a generated 1200x630 share card
 - AdSense-ready placeholders that remain disabled until configured
+
+## Social share cards
+
+Every page carries Open Graph and Twitter Card tags between `<!-- social:start -->` and `<!-- social:end -->` markers in its `<head>`. Each page points at its own 1200x630 card in `og/`, rendered in the site's Studio palette.
+
+After adding a page, or after changing a title, description or the brand palette, regenerate everything with one command:
+
+```bash
+python scripts/generate-social-meta.py
+```
+
+The script is idempotent. It renders one card per HTML page found outside `.freebuff/`, then rewrites the managed block. Any stray `og:*` or `twitter:*` tag outside the markers is removed first, so a page cannot end up with duplicate conflicting tags. `404.html` is skipped on purpose — it has no canonical URL and should never be shared.
+
+`og:image` must be an absolute URL for crawlers to fetch it, so the card URLs use the domain currently in `ORIGIN` near the top of the script. Update that constant when a custom domain replaces the `workers.dev` address, then re-run.
+
+Cards can also be checked by hand in the [Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/) or LinkedIn Post Inspector, both of which refetch and report exactly what a crawler sees.
 
 ## Repository
 
@@ -47,7 +64,9 @@ Every later push to `main` redeploys automatically.
 
 ### What `.assetsignore` controls
 
-The asset directory is the repository root, so without this file Cloudflare uploads `.git/` as public static assets — publishing full commit history, remotes and git config on the live site. `.assetsignore` keeps `.git/`, build tooling, `README.md` and the internal planning notes off the website.
+The asset directory is the repository root, so without this file Cloudflare uploads `.git/` as public static assets — publishing full commit history, remotes and git config on the live site. `.assetsignore` keeps `.git/`, build tooling, `scripts/`, `README.md` and the internal planning notes off the website.
+
+`og/` is deliberately *not* excluded — those share cards have to be publicly reachable for crawlers to fetch them.
 
 ### Direct upload alternative
 
