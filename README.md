@@ -18,18 +18,38 @@ Do not open `index.html` directly from `file://` when testing navigation; use HT
 - Canonical metadata, sitemap, robots.txt, breadcrumbs, and security headers
 - AdSense-ready placeholders that remain disabled until configured
 
+## Repository
+
+Source of truth: `https://github.com/Rabbislmqtr/worksmarthub` (branch `main`).
+
 ## Deployment to Cloudflare Pages
+
+### Option A — Deploy from this GitHub repository (recommended)
+
+There is no build step. Cloudflare publishes the repository root as static files.
+
+1. In the Cloudflare dashboard open **Workers & Pages** → **Create** → **Pages** → **Connect to Git**.
+2. Authorise GitHub and select the `worksmarthub` repository.
+3. Use exactly these build settings:
+   - **Production branch:** `main`
+   - **Framework preset:** `None`
+   - **Build command:** *(leave empty)*
+   - **Build output directory:** `/`
+4. Select **Save and Deploy**. The first deployment produces a `*.pages.dev` URL.
+5. Confirm the `*.pages.dev` URL serves the styled homepage before adding a domain.
+6. Add the custom domain under **Custom domains**, then wait for HTTPS to become active.
+7. Every later push to `main` redeploys automatically; pushes to other branches and pull requests produce preview URLs.
+
+### Option B — Direct upload
 
 **Upload the complete project folder, not only `index.html`.** The site needs `styles.css`, `tokens.css`, `app.js`, `favicon.svg`, and every `tools/` and `guides/` subdirectory. If you open a single HTML file or upload only one file, the site will appear as plain browser-default HTML and the other links cannot resolve.
 
-1. Create a Cloudflare account.
-2. Create a Pages project connected to this repository, or upload the static output.
-3. Use the project root as the build output directory.
-4. There is currently no build command: the root files and subdirectories are the deployable site. Preserve the folder structure exactly.
-5. Open the deployed domain root, not an individual file or Preview-tab-only URL.
-6. Add a custom domain in Cloudflare Pages before applying for advertising.
-7. Confirm HTTPS, every route, `robots.txt`, and `sitemap.xml`.
-8. Replace `https://worksmarthub.example` in canonical tags and the sitemap with the real domain.
+### After the first deploy
+
+1. Open the deployed domain root, not an individual file or Preview-tab-only URL.
+2. Confirm HTTPS, every route, `robots.txt`, and `sitemap.xml`.
+3. Replace `https://worksmarthub.example` in canonical tags and the sitemap with the real domain.
+4. Confirm the homepage renders with the cream paper background and dark hero card. If it renders as plain browser-default text, the stylesheet did not load.
 
 ## Before launch
 
