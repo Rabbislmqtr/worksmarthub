@@ -11,6 +11,7 @@
 # Build tooling
 .wrangler/
 node_modules/
+wrangler.jsonc
 
 # Editor and agent state
 .freebuff/
