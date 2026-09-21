@@ -22,6 +22,8 @@ Do not open `index.html` directly from `file://` when testing navigation; use HT
 
 Source of truth: `https://github.com/Rabbislmqtr/worksmarthub` (branch `main`).
 
+Live URL: `https://worksmarthub.rabbilslmqtr.workers.dev`
+
 ## Deployment to Cloudflare
 
 This project deploys as a **Worker with static assets** (Cloudflare is merging Pages into Workers). All build configuration lives in `wrangler.jsonc`, so the dashboard needs nothing beyond the Git connection.
@@ -55,7 +57,7 @@ The asset directory is the repository root, so without this file Cloudflare uplo
 
 1. Open the deployed domain root, not an individual file or Preview-tab-only URL.
 2. Confirm HTTPS, every route, `robots.txt`, and `sitemap.xml`.
-3. Replace `https://worksmarthub.example` in canonical tags and the sitemap with the real domain.
+3. Canonical URLs, `sitemap.xml` and `robots.txt` currently point at `https://worksmarthub.rabbilslmqtr.workers.dev`. Update all three in one pass when a custom domain is connected.
 4. Confirm the homepage renders with the cream paper background and dark hero card. If it renders as plain browser-default text, the stylesheet did not load.
 
 ## Before launch
