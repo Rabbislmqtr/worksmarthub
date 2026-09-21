@@ -1,0 +1,17 @@
+# Local agent / editor state
+.freebuff/
+.vscode/
+.idea/
+
+# OS noise
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Python static-preview server artifacts
+__pycache__/
+*.pyc
+
+# Internal planning notes (not part of the published website)
+Chatgpt prompt.txt
+Claude Prompt.txt

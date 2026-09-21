@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /search/
+Sitemap: https://worksmarthub.example/sitemap.xml

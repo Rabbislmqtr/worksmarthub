@@ -1,0 +1,27 @@
+/* Hallmark · token system · Workbench / Studio · audience: global small businesses · use: choose and complete a tool · tone: editorial utilitarian */
+:root{
+  --color-paper: oklch(96% .018 92);
+  --color-paper-deep: oklch(91% .026 92);
+  --color-ink: oklch(23% .035 242);
+  --color-ink-soft: oklch(40% .035 242);
+  --color-ink-faint: oklch(57% .028 242);
+  --color-accent: oklch(61% .145 159);
+  --color-accent-deep: oklch(43% .11 158);
+  --color-accent-wash: oklch(89% .055 158);
+  --color-warm: oklch(76% .12 73);
+  --color-white: oklch(99% .006 92);
+  --color-rule: oklch(80% .025 92);
+  --color-focus: oklch(55% .17 159);
+  --color-notice: oklch(95% .035 87);
+  --color-footer-rule: oklch(96% .018 92 / .2);
+  --font-display: "Georgia", "Times New Roman", serif;
+  --font-body: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 20px; --space-6: 24px; --space-8: 32px; --space-10: 40px; --space-12: 48px; --space-16: 64px; --space-20: 80px; --space-24: 96px;
+  --text-xs: .72rem; --text-sm: .86rem; --text-md: 1rem; --text-lg: 1.16rem; --text-xl: 1.55rem; --text-2xl: 2.2rem; --text-display: clamp(3rem,7vw,6.7rem);
+  --radius-sm: 6px; --radius-md: 12px; --radius-lg: 22px;
+  --rule-thin: 1px solid var(--color-rule);
+  --ease-out: cubic-bezier(.2,.8,.2,1); --ease-in: cubic-bezier(.7,0,.84,0); --ease-in-out: cubic-bezier(.65,0,.35,1);
+  --dur-fast: 140ms; --dur-base: 220ms; --dur-slow: 500ms;
+  --shadow-soft: 0 18px 42px oklch(23% .035 242 / .10);
+}
