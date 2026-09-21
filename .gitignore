@@ -15,3 +15,7 @@ __pycache__/
 # Internal planning notes (not part of the published website)
 Chatgpt prompt.txt
 Claude Prompt.txt
+
+# Owner-facing to-do list. Kept private on purpose: it records the legal details
+# that still need supplying, so it must not appear in the public repository.
+LAUNCH-CHECKLIST.md

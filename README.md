@@ -79,11 +79,20 @@ The asset directory is the repository root, so without this file Cloudflare uplo
 3. Canonical URLs, `sitemap.xml` and `robots.txt` currently point at `https://worksmarthub.rabbilslmqtr.workers.dev`. Update all three in one pass when a custom domain is connected.
 4. Confirm the homepage renders with the cream paper background and dark hero card. If it renders as plain browser-default text, the stylesheet did not load.
 
+## Policy pages
+
+The Privacy Policy, Terms of Use, Cookie Policy and Disclaimer describe what this site **actually does**, not boilerplate. They state three specific claims, and each is verifiable against the code:
+
+- calculators run entirely in the browser and transmit nothing;
+- the site sets no cookies of its own and uses no browser storage;
+- no analytics or advertising code is loaded — the site makes no third-party requests at all.
+
+**If a change breaks one of those claims, the matching policy page must be updated in the same commit.** Adding server-side AI breaks the first; adding analytics, AdSense or a preference-storing banner breaks the second; installing the AdSense snippet breaks the third.
+
+These documents have not been reviewed by a lawyer. Owner-specific details that only the site owner can supply — legal entity name and address, governing law, effective date — are deliberately absent rather than invented, and are tracked in a private local file that is excluded from both this repository and the deployed site.
+
 ## Before launch
 
-- Replace the example brand/domain/email values.
-- Review and customize Privacy Policy, Terms, Cookie Policy, and Disclaimer for the owner’s jurisdiction and services.
-- Add a real monitored contact address.
 - Review all guide content and calculator formulas.
 - Test at 320px, 375px, 390px, 412px, 768px, 1024px, and desktop widths.
 - Connect Google Search Console and submit the sitemap.
