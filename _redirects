@@ -1,1 +1,7 @@
-/* /404.html 404
+# Cloudflare only accepts 200, 301, 302 (default), 303, 307 and 308 here.
+# A "404" rewrite is NOT supported and fails the deploy.
+# The custom 404 page is configured instead in wrangler.jsonc via
+# assets.not_found_handling = "404-page".
+#
+# Canonicalise the explicit index file so /index.html does not compete with /
+/index.html / 301

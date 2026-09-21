@@ -1,0 +1,23 @@
+# Files in the asset directory that must never be uploaded to Cloudflare.
+# The whole repository root is the asset directory, so this keeps
+# version-control and tooling internals off the public website.
+
+# Git internals - publishing these exposes full history, remotes and config
+.git/
+.gitignore
+.gitattributes
+.github/
+
+# Build tooling
+.wrangler/
+node_modules/
+
+# Editor and agent state
+.freebuff/
+.vscode/
+.idea/
+
+# Internal notes and documentation (not part of the website)
+README.md
+Chatgpt prompt.txt
+Claude Prompt.txt

@@ -1,6 +1,6 @@
 # WorkSmart Hub
 
-A static-first small-business tools and guides website. The initial version is designed to be fast, mobile-friendly, accessible, and ready for a future Cloudflare Pages deployment.
+A static-first small-business tools and guides website, deployed to Cloudflare as a Worker with static assets. Designed to be fast, mobile-friendly, accessible, and free to host.
 
 ## Run locally
 
@@ -22,25 +22,32 @@ Do not open `index.html` directly from `file://` when testing navigation; use HT
 
 Source of truth: `https://github.com/Rabbislmqtr/worksmarthub` (branch `main`).
 
-## Deployment to Cloudflare Pages
+## Deployment to Cloudflare
 
-### Option A — Deploy from this GitHub repository (recommended)
+This project deploys as a **Worker with static assets** (Cloudflare is merging Pages into Workers). All build configuration lives in `wrangler.jsonc`, so the dashboard needs nothing beyond the Git connection.
 
-There is no build step. Cloudflare publishes the repository root as static files.
+### Connect the repository
 
-1. In the Cloudflare dashboard open **Workers & Pages** → **Create** → **Pages** → **Connect to Git**.
-2. Authorise GitHub and select the `worksmarthub` repository.
-3. Use exactly these build settings:
-   - **Production branch:** `main`
-   - **Framework preset:** `None`
-   - **Build command:** *(leave empty)*
-   - **Build output directory:** `/`
-4. Select **Save and Deploy**. The first deployment produces a `*.pages.dev` URL.
-5. Confirm the `*.pages.dev` URL serves the styled homepage before adding a domain.
-6. Add the custom domain under **Custom domains**, then wait for HTTPS to become active.
-7. Every later push to `main` redeploys automatically; pushes to other branches and pull requests produce preview URLs.
+1. In the Cloudflare dashboard open **Workers & Pages** → **Create** → **Workers** → **Import a repository**.
+2. Authorise GitHub and select `Rabbislmqtr/worksmarthub`.
+3. Keep the production branch as `main`. The deploy command is `npx wrangler deploy` and there is no build step.
+4. Save and deploy. The first deployment produces a `*.workers.dev` URL.
+5. Confirm that URL serves the styled homepage before adding a custom domain.
+6. Add the domain under **Settings → Domains & Routes**, then wait for HTTPS to become active.
 
-### Option B — Direct upload
+Every later push to `main` redeploys automatically.
+
+### What `wrangler.jsonc` controls
+
+- `assets.directory: "."` — the repository root is the website.
+- `assets.not_found_handling: "404-page"` — serves `404.html` for unknown paths. This replaces the invalid `/* /404.html 404` line from `_redirects`: Cloudflare only accepts 200, 301, 302, 303, 307 and 308 in that file, so any 404 rewrite fails the deploy.
+- `assets.html_handling: "auto-trailing-slash"` — serves `tools/` from `tools/index.html` and redirects `/tools` to `/tools/`.
+
+### What `.assetsignore` controls
+
+The asset directory is the repository root, so without this file Cloudflare uploads `.git/` as public static assets — publishing full commit history, remotes and git config on the live site. `.assetsignore` keeps `.git/`, build tooling, `README.md` and the internal planning notes off the website.
+
+### Direct upload alternative
 
 **Upload the complete project folder, not only `index.html`.** The site needs `styles.css`, `tokens.css`, `app.js`, `favicon.svg`, and every `tools/` and `guides/` subdirectory. If you open a single HTML file or upload only one file, the site will appear as plain browser-default HTML and the other links cannot resolve.
 
